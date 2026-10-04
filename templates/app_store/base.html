@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TechStore{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="container nav-inner">
+        <a href="{% url 'app_store:home' %}" class="logo"> TechStore</a>
+        <nav class="nav-links">
+            <a href="{% url 'app_store:home' %}">Home</a>
+            <a href="{% url 'app_store:product_list' %}">All Products</a>
+        </nav>
+        <div class="nav-auth">
+            {% if user.is_authenticated %}
+                <!-- <span>Hi, {{ user.username }}</span> -->
+                <a href="{% url 'app_accounts:profile' %}">Hi, {{ user.username }}</a>
+                <a href="{% url 'app_accounts:logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'app_accounts:login' %}">Login</a>
+                <a href="{% url 'app_accounts:register' %}">Register</a>
+            {% endif %}
+        </div>
+    </div>
+</header>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>© 2026 TechStore. Built with Django.</p>
+    </div>
+</footer>
+
+</body>
+</html>

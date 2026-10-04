@@ -1,0 +1,81 @@
+{% extends 'app_store/base.html' %}
+
+{% block title %}TechStore — Home{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    {% for banner in banners %}
+        <div class="hero-slide" style="background-image:url('{{ banner.image.url }}')">
+            <div class="hero-content">
+                <h1>{{ banner.title }}</h1>
+                <p>{{ banner.content }}</p>
+            </div>
+        </div>
+    {% empty %}
+        <div class="hero-slide" style="background:#111;">
+            <div class="hero-content">
+                <h1>Welcome to TechStore</h1>
+                <p>Discover the latest tech products.</p>
+            </div>
+        </div>
+    {% endfor %}
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2>Shop by Category</h2>
+        <div class="grid">
+            {% for category in categories %}
+                <a href="{% url 'app_store:category_detail' category.id %}" class="category-card">
+                    {% if category.image %}
+                        <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                    {% endif %}
+                    <h3>{{ category.name }}</h3>
+                </a>
+            {% empty %}
+                <p>No categories yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2>Featured Products</h2>
+        <div class="grid">
+            {% for product in featured_products %}
+                <div class="product-card">
+                    <a href="{% url 'app_store:product_detail' product.id %}">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                        {% endif %}
+                        <h3>{{ product.name }}</h3>
+                        <p>₹{{ product.price }}</p>
+                    </a>
+                </div>
+            {% empty %}
+                <p>No featured products yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2>Promotions</h2>
+        {% for promo in promotions %}
+            <div class="promo">
+                <h3>{{ promo.title }}</h3>
+                <p>{{ promo.content }}</p>
+                {% if promo.image %}
+                    <img src="{{ promo.image.url }}" alt="{{ promo.title }}">
+                {% endif %}
+            </div>
+        {% empty %}
+            <p>No promotions yet.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

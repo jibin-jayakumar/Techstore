@@ -1,0 +1,30 @@
+{% extends 'app_store/base.html' %}
+
+{% block title %}{{ product.name }} — TechStore{% endblock %}
+
+{% block content %}
+<div class="container section">
+    <div class="product-detail">
+        <div>
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% endif %}
+        </div>
+        <div>
+            <h1>{{ product.name }}</h1>
+            <p class="price">₹{{ product.price }}</p>
+            <p><strong>Category:</strong> {{ product.category.name }}</p>
+            <p>{{ product.description }}</p>
+        </div>
+    </div>
+    {% if user.is_authenticated %}
+    <button class="buy-btn" onclick="alert('Order placed! (Demo only — no real payment)')">
+        Add to Bag
+    </button>
+    {% else %}
+    <a href="{% url 'app_accounts:login' %}" class="buy-btn">
+        Sign in to Buy
+    </a>
+    {% endif %}
+</div>
+{% endblock %}

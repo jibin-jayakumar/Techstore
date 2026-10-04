@@ -1,0 +1,24 @@
+{% extends 'app_store/base.html' %}
+
+{% block title %}{{ category.name }} — TechStore{% endblock %}
+
+{% block content %}
+<div class="container section">
+    <h2>{{ category.name }}</h2>
+    <div class="grid">
+        {% for product in products %}
+            <div class="product-card">
+                <a href="{% url 'app_store:product_detail' product.id %}">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% endif %}
+                    <h3>{{ product.name }}</h3>
+                    <p>₹{{ product.price }}</p>
+                </a>
+            </div>
+        {% empty %}
+            <p>No products in this category yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

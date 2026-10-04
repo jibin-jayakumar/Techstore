@@ -1,0 +1,17 @@
+{% extends 'app_store/base.html' %}
+
+{% block title %}Register — TechStore{% endblock %}
+
+{% block content %}
+<div class="container section">
+    <h2>Create an Account</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+    <p style="text-align:center; margin-top:16px;">
+        Already have an account? <a href="{% url 'app_accounts:login' %}">Login</a>
+    </p>
+</div>
+{% endblock %}
