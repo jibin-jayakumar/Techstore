@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+
+    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary', 
+
     'app_store',
     'app_accounts',
 ]
@@ -138,3 +142,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL= 'app_accounts:login'
 LOGIN_REDIRECT_URL = 'app_store:home'
 LOGOUT_REDIRECT_URL= 'app_store:home'
+
+# Cloudinary
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', 'inys4wse'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY', '616347158747537'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET', 'XpATTSpD9cTZzai7ogQq1b2alzs'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
